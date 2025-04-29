@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Gallery</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h2>Your Images</h2>
+    <div class="gallery-grid">
+        {% for image in images %}
+        <div class="image-card">
+            <img src="{{ url_for('static', filename='uploads/' + image[0]) }}" alt="{{ image[1] }}">
+            <h4>{{ image[1] }}</h4>
+            <p>{{ image[2] }}</p>
+            <form action="/delete/{{ image[3] }}" method="POST">
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+    <a href="/upload">Upload More</a> | <a href="/logout">Logout</a>
+</div>
+</body>
+</html>
